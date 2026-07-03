@@ -13,3 +13,5 @@ func Repeat(text string, iterations int) string {
 	}
 	return repeated.String()
 }
+
+// TODO: Implement WriteString and string (for benchmark purposes)

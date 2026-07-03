@@ -10,3 +10,5 @@ func TestRepeat(t *testing.T) {
 		t.Errorf("got %q but expected %q", repeated, expected)
 	}
 }
+
+// TODO:: Implement benchmark
