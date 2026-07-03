@@ -4,14 +4,18 @@ import (
 	"fmt"
 )
 
-func Hello(name string) string {
+func Hello(name, lang string) string {
 	if name == "" {
 		name = "world"
 	}
+	if lang == "Spanish" {
+		return "Hola, " + name
+	}
+
 	return "Hello, " + name
 }
 
 func main() {
-	output := fmt.Sprintln(Hello("Murillo"))
+	output := fmt.Sprintln(Hello("Murillo", ""))
 	fmt.Println(output)
 }
