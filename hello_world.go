@@ -4,15 +4,20 @@ import (
 	"fmt"
 )
 
-func Hello(name, lang string) string {
+const defaultName = "world"
+const spanish = "Spanish"
+const englishHelloPrefix = "Hello, "
+const spanishHelloPrefix = "Hola, "
+
+func Hello(name string, lang string) string {
 	if name == "" {
-		name = "world"
+		name = defaultName
 	}
-	if lang == "Spanish" {
-		return "Hola, " + name
+	if lang == spanish {
+		return spanishHelloPrefix + name
 	}
 
-	return "Hello, " + name
+	return englishHelloPrefix + name
 }
 
 func main() {
