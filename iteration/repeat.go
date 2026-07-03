@@ -1,9 +1,15 @@
 package iteration
 
-func Repeat(text string) string {
-	var repeated string
-	for range 5 {
-		repeated += text
+import "strings"
+
+func Repeat(text string, iterations int) string {
+	if iterations < 0 {
+		iterations = 0
 	}
-	return repeated
+
+	var repeated strings.Builder
+	for range iterations {
+		repeated.Write([]byte(text))
+	}
+	return repeated.String()
 }
