@@ -21,10 +21,23 @@ func TestSum(t *testing.T) {
 
 		assertIsSumEqual(t, expected, sum)
 	})
+
+	t.Run("sum all", func(t *testing.T) {
+		sums := SumAll([]int{1, 2}, []int{3, 4})
+		expected := []int{3, 7}
+
+		assertIsSliceEqual(t, expected, sums)
+	})
 }
 
 func assertIsSumEqual(t *testing.T, expected, got int) {
 	if got != expected {
-		t.Errorf("expected %d, got %d", got, expected)
+		t.Errorf("expected %d, got %d", expected, got)
+	}
+}
+
+func assertIsSliceEqual(t *testing.T, expected, got []int) {
+	if !slices.Equal(expected, got) {
+		t.Errorf("expected %v, got %v", expected, got)
 	}
 }
