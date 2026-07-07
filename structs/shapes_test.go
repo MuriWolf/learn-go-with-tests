@@ -3,35 +3,42 @@ package structs
 import "testing"
 
 func TestPerimeter(t *testing.T) {
-	t.Run("Get perimeter of a retangle", func(t *testing.T) {
-		retangle := Rectangle{10.0, 10.0}
-		perimeter := retangle.Perimeter()
-		expected := 40.0
-		assertFloat(t, expected, perimeter)
-	})
+	checkPerimeter := func(t *testing.T, shape Shape, want float64) {
+		perimeter := shape.Perimeter()
+		assertFloat(t, want, perimeter)
+	}
 
-	t.Run("Get perimeter of a circle", func(t *testing.T) {
-		circle := Circle{10}
-		perimeter := circle.Perimeter()
-		expected := 62.83185307179586
-		assertFloat(t, expected, perimeter)
-	})
+	perimeterTests := []struct {
+		shape Shape
+		want  float64
+	}{
+		{Rectangle{10.0, 10.0}, 40.0},
+		{Circle{10}, 62.83185307179586},
+	}
+
+	for _, tt := range perimeterTests {
+		checkPerimeter(t, tt.shape, tt.want)
+	}
+
 }
 
 func TestArea(t *testing.T) {
-	t.Run("Get area of a retangle", func(t *testing.T) {
-		retangle := Rectangle{10.0, 10.0}
-		area := retangle.Area()
-		expected := 100.0
-		assertFloat(t, expected, area)
-	})
+	checkArea := func(t *testing.T, shape Shape, want float64) {
+		area := shape.Area()
+		assertFloat(t, want, area)
+	}
 
-	t.Run("Get area of a circle", func(t *testing.T) {
-		circle := Circle{10}
-		area := circle.Area()
-		expected := 314.1592653589793
-		assertFloat(t, expected, area)
-	})
+	areaTests := []struct {
+		shape Shape
+		want  float64
+	}{
+		{Rectangle{10.0, 10.0}, 100.0},
+		{Circle{10}, 314.1592653589793},
+	}
+
+	for _, tt := range areaTests {
+		checkArea(t, tt.shape, tt.want)
+	}
 
 }
 
