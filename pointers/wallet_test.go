@@ -1,18 +1,24 @@
 package pointers
 
 import (
-	"fmt"
 	"testing"
 )
 
 func TestWallet(t *testing.T) {
 	assertWallet := func(t *testing.T, wallet Wallet, want Bitcoin) {
 		t.Helper()
-		fmt.Printf("the address of the wallet in test is: %p \n", &wallet.balance)
 
 		got := wallet.Balance()
 		if want != got {
 			t.Errorf("want %s got %s", want, got)
+		}
+	}
+
+	assertError := func(t *testing.T, err error) {
+		t.Helper()
+
+		if err == nil {
+			t.Error("Wanted a error but got nil")
 		}
 	}
 
@@ -29,5 +35,15 @@ func TestWallet(t *testing.T) {
 		wallet.Withdraw(Bitcoin(10))
 
 		assertWallet(t, wallet, Bitcoin(15))
+	})
+
+	t.Run("withdraw insufficient funds", func(t *testing.T) {
+		startingBalance := Bitcoin(20)
+		wallet := Wallet{balance: startingBalance}
+		err := wallet.Withdraw(Bitcoin(100))
+
+		assertError(t, err)
+		assertWallet(t, wallet, startingBalance)
+
 	})
 }
