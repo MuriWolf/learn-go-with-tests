@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestDictionary(t *testing.T) {
+func TestSearch(t *testing.T) {
 	dictionary := Dictionary{"test": "verify if something works as expected"}
 
 	t.Run("search defined word", func(t *testing.T) {
@@ -22,6 +22,10 @@ func TestDictionary(t *testing.T) {
 		}
 		assertError(t, error, NotFound)
 	})
+}
+
+func TestAdd(t *testing.T) {
+	dictionary := Dictionary{"test": "verify if something works as expected"}
 
 	t.Run("add word", func(t *testing.T) {
 		newDictionary := Dictionary{}
@@ -42,6 +46,10 @@ func TestDictionary(t *testing.T) {
 
 		assertError(t, AlreadyDefined, error)
 	})
+}
+
+func TestUpdate(t *testing.T) {
+	dictionary := Dictionary{"test": "verify if something works as expected"}
 
 	t.Run("update defined word", func(t *testing.T) {
 		word := "test"
@@ -61,6 +69,10 @@ func TestDictionary(t *testing.T) {
 
 		assertError(t, NotDefined, error)
 	})
+}
+
+func TestDelete(t *testing.T) {
+	dictionary := Dictionary{"test": "verify if something works as expected"}
 
 	t.Run("delete word", func(t *testing.T) {
 		word := "test"
@@ -98,6 +110,7 @@ func assertError(t *testing.T, want, got error) {
 }
 
 func assertDefinition(t *testing.T, dictionary Dictionary, word, definition string) {
+	t.Helper()
 	got, error := dictionary.Search(word)
 
 	if error != nil {
